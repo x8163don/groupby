@@ -3,9 +3,9 @@ import {proxy, useSnapshot} from 'valtio'
 import Session from "./domain/Session";
 import Court from "./domain/Court";
 import Join from "./domain/Join";
-import CourtView from "./component/CourtView";
-import Player from "./domain/Player";
-import {Button} from "@material-tailwind/react";
+import {default as CourtView} from "./component/Court";
+import SessionInformation from "./component/SessionInformation";
+import PlayerArea from "./component/PlayerArea";
 
 const session = proxy(new Session(1))
 
@@ -13,12 +13,36 @@ function App() {
 
     const snapshot = useSnapshot(session)
 
+    const addCourtHandler = () => {
+        session.addCourt(new Court(+Date.now(), 4))
+    }
+
     const removeCourtHandler = (courtID) => {
         session.removeCourt(courtID)
     }
 
-    const addSessionPlayerHandler = (player) => {
-        session.addJoin(new Join(session, player))
+    const addSessionPlayerHandler = (playerList, readyToJoinPlayers) => {
+        readyToJoinPlayers.forEach((player) => {
+            session.addJoin(new Join(session, player))
+        })
+
+        const notReadyToJoinPlayers = playerList.filter((player) => {
+            return readyToJoinPlayers.findIndex((readyToJoinPlayer) => readyToJoinPlayer.id === player.id) === -1
+        })
+
+        notReadyToJoinPlayers.forEach((player) => {
+            session.removeJoinPlayer(player.id)
+        })
+
+        const deletedPlayers = session.sessionPlayers.filter((join) => {
+            return playerList.findIndex((player) => player.id === join.player.id) !== -1
+        })
+
+        deletedPlayers.forEach((player) => {
+            session.removeJoinPlayer(player.id)
+        })
+
+        localStorage.setItem("PlayerList", JSON.stringify(playerList))
     }
 
     const groupHandler = () => {
@@ -29,40 +53,38 @@ function App() {
         session.endGame(courtID)
     }
 
-    return <div>
-        <p>{snapshot.sessionPlayers.length}</p>
-        <p>{snapshot.courts.length}</p>
+    const onPlayerRest = (playerID) => {
+        session.changePlayerRestState(playerID)
+    }
 
-        <Button onClick={() => session.addCourt(new Court(+Date.now()
-            , 4))}>addCourt
-        </Button>
+    return <div className="grid gap-y-2 grid-cols-1 auto-rows-auto sm:p-16 grid-rows-[calc(100vh-186px)_90px_80px]">
+        <SessionInformation
+            className="row-start-3 sm:row-start-1 mx-auto sm:mx-0"
+            session={snapshot}
+            onAddCourt={addCourtHandler}
+            onGroup={groupHandler}
+            onAddPlayer={addSessionPlayerHandler}
+        />
 
-        <Button onClick={() => {
-            const player = new Player(+Date.now(), 'test', 'man')
-            const join = new Join(session,player)
-            session.addJoin(join)
+        <PlayerArea
+            className="px-2 row-start-2 sm:row-start-2 overflow-x-auto"
+            session={snapshot}
+            onAddPlayer={addSessionPlayerHandler}
+            onPlayerRest={onPlayerRest}
+        />
 
-        }}>addPlayer</Button>
-
-        <Button onClick={groupHandler}>group</Button>
-
-        {
-            snapshot.courts.map((court,i) => {
-                return <CourtView key={court.id}
-                                  no={i+1}
-                                  court={court}
-                                  onRemoveCourt={() => removeCourtHandler(court.id)}
-                                  onEndGame={() => endGameHandler(court.id)}
-                />
-            })
-        }
-
-        {
-            session.getNotInGamePlayers().map(player => <p key={player.id}>{player.name}</p>)
-        }
-
-
-
+        <div className="row-start-1 sm:row-start-3 flex gap-4 overflow-x-auto">
+            {
+                snapshot.courts.map((court, i) => {
+                    return <CourtView key={court.id}
+                                      no={i + 1}
+                                      court={court}
+                                      onRemoveCourt={() => removeCourtHandler(court.id)}
+                                      onEndGame={() => endGameHandler(court.id)}
+                    />
+                })
+            }
+        </div>
     </div>
 }
 

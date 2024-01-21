@@ -18,6 +18,13 @@ export default class Session {
         join.player.incrementJoinTimes()
     }
 
+    removeJoinPlayer(playerID){
+        this.sessionPlayers = this.sessionPlayers.filter((join) => join.player.id !== playerID)
+        this.courts.forEach((court) => {
+            court.inGamePlayers = court.inGamePlayers.filter((inGamePlayer) => inGamePlayer.player.id !== playerID)
+        })
+    }
+
     addCourt(court) {
         this.courts.push(court);
     }
@@ -36,7 +43,7 @@ export default class Session {
 
     changePlayerRestState(playerID) {
         this.courts.forEach((court) => {
-            const idx = court.inGamePlayers.findIndex(inGamePlayer => inGamePlayer.player.id === playerID)
+            const idx = court.inGamePlayers.findIndex(inGamePlayer => inGamePlayer?.player?.id === playerID)
             if (idx === -1) {
                 return
             }
