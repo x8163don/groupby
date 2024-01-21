@@ -34,12 +34,12 @@ function App() {
             session.removeJoinPlayer(player.id)
         })
 
-        const deletedPlayers = session.sessionPlayers.filter((join) => {
-            return playerList.findIndex((player) => player.id === join.player.id) !== -1
-        })
+        const deletedPlayers = session.sessionPlayers.filter((join) => !playerList.find((player) => player.id === join.player.id))
 
-        deletedPlayers.forEach((player) => {
-            session.removeJoinPlayer(player.id)
+        console.log(deletedPlayers);
+
+        deletedPlayers.forEach((join) => {
+            session.removeJoinPlayer(join.player.id)
         })
 
         localStorage.setItem("PlayerList", JSON.stringify(playerList))
@@ -57,9 +57,9 @@ function App() {
         session.changePlayerRestState(playerID)
     }
 
-    return <div className="grid gap-y-2 grid-cols-1 auto-rows-auto sm:p-16 grid-rows-[calc(100vh-186px)_90px_80px]">
+    return <div className="grid gap-y-2 grid-cols-1 auto-rows-auto sm:p-16 grid-rows-[calc(100vh-186px)_90px_80px] sm:grid-rows-[80px_90px_calc(100vh-250px)]">
         <SessionInformation
-            className="row-start-3 sm:row-start-1 mx-auto sm:mx-0"
+            className="mb-4 row-start-3 sm:row-start-1 mx-auto sm:mx-0 sm:mb-0"
             session={snapshot}
             onAddCourt={addCourtHandler}
             onGroup={groupHandler}

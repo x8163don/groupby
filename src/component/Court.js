@@ -6,7 +6,7 @@ import EmptyPlayer from "./EmptyPlayer";
 
 export default function Court({no, court, onRemoveCourt, onEndGame}) {
 
-    return <Card className="w-fit">
+    return <Card className="h-fit w-fit">
         <CardBody className="p-0">
             <div className="px-4 flex justify-between items-center">
                 <Typography>No.{no}</Typography>

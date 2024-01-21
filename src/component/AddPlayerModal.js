@@ -70,7 +70,7 @@ export default function AddPlayerModal({isOpen, handleOpen, session, onAddPlayer
         })
     }
 
-    return <Dialog open={isOpen} handler={handleOpen}>
+    return <Dialog open={isOpen}>
         <DialogBody>
             <List className="h-96 overflow-y-scroll mb-4">
                 {playerList.map(player => {
@@ -112,8 +112,7 @@ export default function AddPlayerModal({isOpen, handleOpen, session, onAddPlayer
                         variant="gradient"
                         size="md"
                         color="green"
-                        onClick={newPlayerHandler}>
-                    新增</Button>
+                        onClick={newPlayerHandler}>新增</Button>
             </div>
 
         </DialogBody>
