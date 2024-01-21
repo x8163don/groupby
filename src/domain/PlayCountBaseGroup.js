@@ -2,6 +2,7 @@ import GroupStrategy from './GroupStrategy.js'
 import InGame from './InGame.js'
 
 export default class PlayCountBaseGroup extends GroupStrategy {
+    // eslint-disable-next-line no-useless-constructor
     constructor() {
         super()
     }

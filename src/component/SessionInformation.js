@@ -28,7 +28,7 @@ export default function SessionInformation({className,session, onAddCourt, onGro
         <div className="flex gap-6">
             <Button className="flex flex-col justify-center items-center" onClick={onAddCourt} variant="outlined">
                 <div className="h-8 w-8">
-                    <img src={Court}/>
+                    <img alt="court" src={Court}/>
                 </div>
                 <Typography variant="h6">新增場地</Typography>
             </Button>
@@ -36,15 +36,15 @@ export default function SessionInformation({className,session, onAddCourt, onGro
             <Button className="flex flex-col justify-center items-center" onClick={addPlayerModelHandler}
                     variant="outlined">
                 <div className="h-8 w-8">
-                    <img src={Racket}/>
+                    <img alt="member" src={Racket}/>
                 </div>
                 <Typography variant="h6">新增成員</Typography>
             </Button>
 
             <Button className="flex flex-col justify-center items-center" onClick={onGroup} variant="outlined">
-                <div className="h-8 w-8">
-                    <img src={Rackets}/>
-                </div>
+                <divGroupStrategy className="h-8 w-8">
+                    <img alt="group" src={Rackets}/>
+                </divGroupStrategy>
                 <Typography variant="h6">分組</Typography>
             </Button>
         </div>
