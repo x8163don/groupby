@@ -36,7 +36,7 @@ export default function AddPlayerModal({isOpen, handleOpen, session, onAddPlayer
         };
 
         fetchPlayerList();
-    }, []);
+    }, [session]);
 
     const isSelect = (id) => {
         return readyToJoinPlayers.find(player => player.id === id)
