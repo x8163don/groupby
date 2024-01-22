@@ -16,8 +16,8 @@ export default function SettingModal({isOpen, handleOpen, session, onGroupStrate
         <DialogBody>
             <Typography>分組方式</Typography>
             <div className="flex flex-col">
-                <Radio name="group" value="PlayCountBaseGroup" checked={curGroupStrategy === "PlayCountBaseGroup"} onChange={onGroupStrategyHandler} label="依上場次數"/>
-                <Radio name="group" value="GenderBaseGroup" checked={curGroupStrategy === "GenderBaseGroup"} onChange={onGroupStrategyHandler} label="依照性別"/>
+                <Radio name="group" value="PlayCountBaseGroup" defaultChecked={curGroupStrategy === "PlayCountBaseGroup"} onChange={onGroupStrategyHandler} label="依上場次數"/>
+                <Radio name="group" value="GenderBaseGroup" defaultChecked={curGroupStrategy === "GenderBaseGroup"} onChange={onGroupStrategyHandler} label="依照性別"/>
             </div>
         </DialogBody>
     </Dialog>

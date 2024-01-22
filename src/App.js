@@ -38,8 +38,6 @@ function App() {
 
         const deletedPlayers = session.sessionPlayers.filter((join) => !playerList.find((player) => player.id === join.player.id))
 
-        console.log(deletedPlayers);
-
         deletedPlayers.forEach((join) => {
             session.removeJoinPlayer(join.player.id)
         })
