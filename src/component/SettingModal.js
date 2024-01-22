@@ -3,6 +3,10 @@ import {useEffect, useState} from "react";
 
 export default function SettingModal({isOpen, handleOpen, session, onGroupStrategyChange}) {
     const [curGroupStrategy, setCurGroupStrategy] = useState(session.groupStrategy?.constructor?.name)
+    console.log(session.groupStrategy?.constructor?.name);
+    useEffect(() => {
+        setCurGroupStrategy(session.groupStrategy?.constructor?.name)
+    }, [])
 
     useEffect(() => {
         setCurGroupStrategy(session.groupStrategy?.constructor?.name)
