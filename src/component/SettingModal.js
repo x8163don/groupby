@@ -4,6 +4,9 @@ import {useEffect, useState} from "react";
 export default function SettingModal({isOpen, handleOpen, session, onGroupStrategyChange}) {
     const [curGroupStrategy, setCurGroupStrategy] = useState(session.groupStrategy?.constructor?.name)
 
+    // eslint-disable-next-line
+    useEffect(() => { setCurGroupStrategy(session.groupStrategy?.constructor?.name) }, [])
+
     useEffect(() => {
         setCurGroupStrategy(session.groupStrategy?.constructor?.name)
     }, [session.groupStrategy])
