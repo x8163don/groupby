@@ -4,48 +4,58 @@ import Rackets from "../assets/rackets.svg";
 import Racket from "../assets/racket.svg";
 import AddPlayerModal from "./AddPlayerModal";
 import {useState} from "react";
+import {Cog6ToothIcon} from "@heroicons/react/24/solid";
+import SettingModal from "./SettingModal";
 
-export default function SessionInformation({className,session, onAddCourt, onGroup, onAddPlayer}) {
+export default function SessionInformation({
+                                               className,
+                                               session,
+                                               onAddCourt,
+                                               onGroup,
+                                               onAddPlayer,
+                                               onGroupStrategyChange
+                                           }) {
     const [isAddPlayerOpen, setIsAddPlayerOpen] = useState(false)
+    const [isSettingOpen, setIsSettingOpen] = useState(false)
 
     const addPlayerModelHandler = () => {
         setIsAddPlayerOpen((prev) => !prev)
     }
 
-    return <div className={"w-100 flex justify-between " + className} >
-        {/*<div className="flex gap-4">*/}
-        {/*    <Typography variant="text">總人數：{session.sessionPlayers.length}</Typography>*/}
-        {/*    <Typography*/}
-        {/*        variant="text">場上人數：{session.sessionPlayers.length - session.getNotInGamePlayers().length - session.getRestPlayers().length}</Typography>*/}
-        {/*    <Typography variant="text">場地數量：{session.courts.length}</Typography>*/}
-        {/*</div>        {/*<div className="flex gap-4">*/}
-        {/*    <Typography variant="text">總人數：{session.sessionPlayers.length}</Typography>*/}
-        {/*    <Typography*/}
-        {/*        variant="text">場上人數：{session.sessionPlayers.length - session.getNotInGamePlayers().length - session.getRestPlayers().length}</Typography>*/}
-        {/*    <Typography variant="text">場地數量：{session.courts.length}</Typography>*/}
-        {/*</div>*/}
+    const settingModelHandler = () => {
+        setIsSettingOpen((prev) => !prev)
+    }
 
-        <div className="flex gap-6">
-            <Button className="flex flex-col justify-center items-center" onClick={onAddCourt} variant="outlined">
-                <div className="h-8 w-8">
+    return <div className={"w-100 flex justify-around " + className}>
+        <div className="flex">
+            <Button className="flex flex-col justify-center items-center" onClick={onAddCourt} variant="text">
+                <div className="h-6 w-6">
                     <img alt="court" src={Court}/>
                 </div>
-                <Typography variant="h6">新增場地</Typography>
+                <Typography variant="h6">場地</Typography>
             </Button>
 
             <Button className="flex flex-col justify-center items-center" onClick={addPlayerModelHandler}
-                    variant="outlined">
-                <div className="h-8 w-8">
+                    variant="text">
+                <div className="h-6 w-6">
                     <img alt="member" src={Racket}/>
                 </div>
-                <Typography variant="h6">新增成員</Typography>
+                <Typography variant="h6">成員</Typography>
             </Button>
 
-            <Button className="flex flex-col justify-center items-center" onClick={onGroup} variant="outlined">
-                <divGroupStrategy className="h-8 w-8">
+            <Button className="flex flex-col justify-center items-center" onClick={onGroup} variant="text">
+                <div className="h-6 w-6">
                     <img alt="group" src={Rackets}/>
-                </divGroupStrategy>
+                </div>
                 <Typography variant="h6">分組</Typography>
+            </Button>
+
+            <Button className="flex flex-col justify-center items-center" onClick={settingModelHandler}
+                    variant="text">
+                <div className="h-6 w-6">
+                    <Cog6ToothIcon/>
+                </div>
+                <Typography variant="h6">設定</Typography>
             </Button>
         </div>
 
@@ -55,5 +65,13 @@ export default function SessionInformation({className,session, onAddCourt, onGro
             session={session}
             onAddPlayer={onAddPlayer}
         />
+
+        <SettingModal
+            isOpen={isSettingOpen}
+            handleOpen={settingModelHandler}
+            session={session}
+            onGroupStrategyChange={onGroupStrategyChange}
+        />
+
     </div>
 }

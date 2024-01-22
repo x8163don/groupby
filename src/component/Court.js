@@ -55,8 +55,8 @@ export default function Court({no, court, onRemoveCourt, onEndGame}) {
             </div>
         </CardBody>
         <CardFooter className="flex justify-center">
-            <Button variant="outlined" color="green" onClick={onEndGame}>
-                <Typography variant="h6">結束</Typography>
+            <Button size="sm" variant="outlined" color="green" onClick={onEndGame}>
+                <Typography variant="h6">本場結束</Typography>
             </Button>
         </CardFooter>
     </Card>

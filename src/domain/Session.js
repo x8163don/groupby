@@ -1,4 +1,5 @@
 import PlayCountBaseGroup from './PlayCountBaseGroup.js'
+import GenderBaseGroup from './GenderBaseGroup.js'
 
 export default class Session {
     constructor(id) {
@@ -87,5 +88,9 @@ export default class Session {
         return this.sessionPlayers
             .filter(join => join.isRest)
             .map(join => join.player)
+    }
+
+    setGroupStrategy(groupStrategy) {
+        this.groupStrategy = groupStrategy
     }
 }

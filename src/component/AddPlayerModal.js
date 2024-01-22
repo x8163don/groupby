@@ -74,7 +74,9 @@ export default function AddPlayerModal({isOpen, handleOpen, session, onAddPlayer
         <DialogBody>
             <List className="h-96 overflow-y-scroll mb-4">
                 {playerList.map(player => {
-                    return <ListItem onClick={() => {
+                    return <ListItem
+                        key={player.id}
+                        onClick={() => {
                         if (!readyToJoinPlayers.find(p => p.id === player.id)) {
                             setReadyToJoinPlayers([...readyToJoinPlayers, player])
                         } else {
@@ -84,6 +86,9 @@ export default function AddPlayerModal({isOpen, handleOpen, session, onAddPlayer
                         <ListItemPrefix>
                             {
                                 isSelect(player.id) && <CheckIcon className="h-5 w-5"/>
+                            }
+                            {
+                                !isSelect(player.id) && <span className="h-5 w-5"></span>
                             }
                         </ListItemPrefix>
 

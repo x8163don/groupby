@@ -6,6 +6,8 @@ import Join from "./domain/Join";
 import {default as CourtView} from "./component/Court";
 import SessionInformation from "./component/SessionInformation";
 import PlayerArea from "./component/PlayerArea";
+import PlayCountBaseGroup from "./domain/PlayCountBaseGroup";
+import GenderBaseGroup from "./domain/GenderBaseGroup";
 
 const session = proxy(new Session(1))
 
@@ -57,13 +59,26 @@ function App() {
         session.changePlayerRestState(playerID)
     }
 
-    return <div className="grid gap-y-2 grid-cols-1 auto-rows-auto sm:p-16 grid-rows-[calc(100vh-186px)_90px_80px] sm:grid-rows-[80px_90px_calc(100vh-250px)]">
+    const onGroupStrategyChange = (strategyName) => {
+       switch (strategyName) {
+           case 'PlayCountBaseGroup':
+               session.groupStrategy = new PlayCountBaseGroup()
+               break
+           case 'GenderBaseGroup':
+               session.groupStrategy = new GenderBaseGroup()
+               break
+       }
+    }
+
+    return <div
+        className="grid gap-y-2 grid-cols-1 auto-rows-auto sm:p-16 grid-rows-[calc(100vh-186px)_90px_80px] sm:grid-rows-[80px_90px_calc(100vh-250px)]">
         <SessionInformation
-            className="mb-4 row-start-3 sm:row-start-1 mx-auto sm:mx-0 sm:mb-0"
+            className="mb-4 row-start-3 sm:row-start-1 sm:mb-0"
             session={snapshot}
             onAddCourt={addCourtHandler}
             onGroup={groupHandler}
             onAddPlayer={addSessionPlayerHandler}
+            onGroupStrategyChange={onGroupStrategyChange}
         />
 
         <PlayerArea
