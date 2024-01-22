@@ -2,7 +2,7 @@ import {Dialog, DialogBody, Radio, Typography} from "@material-tailwind/react";
 import {useEffect, useState} from "react";
 
 export default function SettingModal({isOpen, handleOpen, session, onGroupStrategyChange}) {
-    const [curGroupStrategy, setCurGroupStrategy] = useState("")
+    const [curGroupStrategy, setCurGroupStrategy] = useState(session.groupStrategy?.constructor?.name)
 
     useEffect(() => {
         setCurGroupStrategy(session.groupStrategy?.constructor?.name)
