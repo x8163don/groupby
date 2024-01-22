@@ -1,8 +1,8 @@
 import {Dialog, DialogBody, Radio, Typography} from "@material-tailwind/react";
 
 export default function SettingModal({isOpen, handleOpen, session, onGroupStrategyChange}) {
-    const onGroupStrategyHandler = (e) => {
-        onGroupStrategyChange(e.target.value);
+    const onGroupStrategyHandler = (strategyName) => {
+        onGroupStrategyChange(strategyName);
     }
 
     return <Dialog open={isOpen} handler={handleOpen}>
@@ -10,14 +10,12 @@ export default function SettingModal({isOpen, handleOpen, session, onGroupStrate
             <Typography>分組方式</Typography>
             <div className="flex flex-col">
                 <Radio name="group"
-                       value="PlayCountBaseGroup"
                        defaultChecked={session.groupStrategy.constructor.name === "PlayCountBaseGroup"}
-                       onChange={onGroupStrategyHandler}
+                       onClick={() => onGroupStrategyHandler("PlayCountBaseGroup")}
                        label="依上場次數"/>
                 <Radio name="group"
-                       value="GenderBaseGroup"
                        defaultChecked={session.groupStrategy.constructor.name === "GenderBaseGroup"}
-                       onChange={onGroupStrategyHandler}
+                       onClick={() => onGroupStrategyHandler("GenderBaseGroup")}
                        label="依照性別"/>
             </div>
         </DialogBody>
