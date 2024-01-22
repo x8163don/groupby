@@ -49,7 +49,7 @@ export default class GenderBaseGroup extends GroupStrategy {
 
         joinPlayers.forEach((join) => {
             let key = 1
-            if (join.player.gender == "female") {
+            if (join.player.gender === "female") {
                 key = 0
             }
 

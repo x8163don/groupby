@@ -1,5 +1,4 @@
 import PlayCountBaseGroup from './PlayCountBaseGroup.js'
-import GenderBaseGroup from './GenderBaseGroup.js'
 
 export default class Session {
     constructor(id) {

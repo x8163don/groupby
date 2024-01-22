@@ -60,14 +60,17 @@ function App() {
     }
 
     const onGroupStrategyChange = (strategyName) => {
-       switch (strategyName) {
-           case 'PlayCountBaseGroup':
-               session.groupStrategy = new PlayCountBaseGroup()
-               break
-           case 'GenderBaseGroup':
-               session.groupStrategy = new GenderBaseGroup()
-               break
-       }
+        switch (strategyName) {
+            case 'PlayCountBaseGroup':
+                session.groupStrategy = new PlayCountBaseGroup()
+                break
+            case 'GenderBaseGroup':
+                session.groupStrategy = new GenderBaseGroup()
+                break
+            default:
+                session.groupStrategy = new PlayCountBaseGroup()
+                break
+        }
     }
 
     return <div
