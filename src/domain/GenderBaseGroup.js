@@ -46,6 +46,8 @@ export default class GenderBaseGroup extends GroupStrategy {
 
     groupByGender(joinPlayers) {
         const groupedJoins = new Map();
+        groupedJoins.set(0, [])
+        groupedJoins.set(1, [])
 
         joinPlayers.forEach((join) => {
             let key = 1
@@ -53,9 +55,6 @@ export default class GenderBaseGroup extends GroupStrategy {
                 key = 0
             }
 
-            if (!groupedJoins.has(key)) {
-                groupedJoins.set(key, []);
-            }
 
             groupedJoins.get(key).push(join);
         });
