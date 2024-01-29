@@ -7,6 +7,7 @@ export default function Player({player, color, isRest = false}) {
         <div
             className="relative max-w-xs overflow-hidden bg-cover bg-[50%] bg-no-repeat rounded-full">
             <img
+                alt={player.name}
                 src={player.gender === "male" ? Boy : Girl}
                 className="h-12 w-12"/>
             {
