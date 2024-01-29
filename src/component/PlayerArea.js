@@ -7,7 +7,7 @@ export default function PlayerArea({className, session, onPlayerRest}) {
             session.getNotInGamePlayers().map((player, i) => {
                 return <div key={player.id} onClick={() => onPlayerRest(player.id)}
                             className="flex flex-col justify-center items-center cursor-pointer min-w-14">
-                    <PlayerView isShowStatus player={player}/>
+                    <PlayerView player={player}/>
                 </div>
             })
         }
@@ -15,7 +15,7 @@ export default function PlayerArea({className, session, onPlayerRest}) {
             session.getRestPlayers().map((player, i) => {
                 return <div key={player.id} onClick={() => onPlayerRest(player.id)}
                             className="flex flex-col justify-center items-center cursor-pointer min-w-14">
-                    <PlayerView isShowStatus isRest={true} player={player}/>
+                    <PlayerView isRest={true} player={player}/>
                 </div>
             })
         }

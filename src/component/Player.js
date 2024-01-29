@@ -2,7 +2,7 @@ import {Typography} from "@material-tailwind/react";
 import Boy from "../assets/boy.svg";
 import Girl from "../assets/girl.svg";
 
-export default function Player({player, color, isShowStatus = false, isRest = false}) {
+export default function Player({player, color, isRest = false}) {
     return <div className="h-fit w-fit flex flex-col items-center">
         <div
             className="relative max-w-xs overflow-hidden bg-cover bg-[50%] bg-no-repeat rounded-full">
