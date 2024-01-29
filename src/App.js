@@ -9,12 +9,20 @@ import PlayerArea from "./component/PlayerArea";
 import PlayCountBaseGroup from "./domain/PlayCountBaseGroup";
 import GenderBaseGroup from "./domain/GenderBaseGroup";
 import RandomBaseGroup from "./domain/RandomBaseGroup";
+import {useEffect} from "react";
 
 const session = proxy(new Session(1))
 
 function App() {
 
     const snapshot = useSnapshot(session)
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    useEffect(() => {
+        if (session.courts.length === 0) {
+            session.addCourt(new Court(+Date.now(), 4))
+        }
+    }, [])
 
     const addCourtHandler = () => {
         session.addCourt(new Court(+Date.now(), 4))
