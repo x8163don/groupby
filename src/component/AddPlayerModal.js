@@ -76,6 +76,7 @@ export default function AddPlayerModal({isOpen, handleOpen, session, onAddPlayer
                 {playerList.map(player => {
                     return <ListItem
                         key={player.id}
+                        ripple={false}
                         onClick={() => {
                         if (!readyToJoinPlayers.find(p => p.id === player.id)) {
                             setReadyToJoinPlayers([...readyToJoinPlayers, player])
@@ -119,7 +120,6 @@ export default function AddPlayerModal({isOpen, handleOpen, session, onAddPlayer
                         color="green"
                         onClick={newPlayerHandler}>新增</Button>
             </div>
-
         </DialogBody>
         <DialogFooter>
             <Button variant="text" color="red" onClick={handleOpen}>取消</Button>

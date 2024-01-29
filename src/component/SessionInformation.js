@@ -2,10 +2,12 @@ import {Button, Typography} from "@material-tailwind/react";
 import Court from "../assets/court.svg";
 import Rackets from "../assets/rackets.svg";
 import Racket from "../assets/racket.svg";
+import Record from "../assets/record.svg";
 import AddPlayerModal from "./AddPlayerModal";
 import {useState} from "react";
 import {Cog6ToothIcon} from "@heroicons/react/24/solid";
 import SettingModal from "./SettingModal";
+import RecordModal from "./RecordModal";
 
 export default function SessionInformation({
                                                className,
@@ -13,10 +15,12 @@ export default function SessionInformation({
                                                onAddCourt,
                                                onGroup,
                                                onAddPlayer,
-                                               onGroupStrategyChange
+                                               onGroupStrategyChange,
+                                               onResetGamePlayCount
                                            }) {
     const [isAddPlayerOpen, setIsAddPlayerOpen] = useState(false)
     const [isSettingOpen, setIsSettingOpen] = useState(false)
+    const [isRecordOpen, setIsRecordOpen] = useState(false)
 
     const addPlayerModelHandler = () => {
         setIsAddPlayerOpen((prev) => !prev)
@@ -24,6 +28,10 @@ export default function SessionInformation({
 
     const settingModelHandler = () => {
         setIsSettingOpen((prev) => !prev)
+    }
+
+    const recordModelHandler = () => {
+        setIsRecordOpen((prev) => !prev)
     }
 
     return <div className={"w-100 flex justify-around " + className}>
@@ -57,6 +65,14 @@ export default function SessionInformation({
                 </div>
                 <Typography variant="h6">設定</Typography>
             </Button>
+
+            <Button className="flex flex-col justify-center items-center" onClick={recordModelHandler}
+                    variant="text">
+                <div className="h-6 w-6">
+                    <img alt="record" src={Record}/>
+                </div>
+                <Typography variant="h6">記錄</Typography>
+            </Button>
         </div>
 
         <AddPlayerModal
@@ -72,6 +88,14 @@ export default function SessionInformation({
             session={session}
             onGroupStrategyChange={onGroupStrategyChange}
         />
+
+        <RecordModal
+            isOpen={isRecordOpen}
+            handleOpen={recordModelHandler}
+            session={session}
+            onResetGamePlayCount={onResetGamePlayCount}
+        >
+        </RecordModal>
 
     </div>
 }

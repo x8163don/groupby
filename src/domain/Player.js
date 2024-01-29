@@ -4,7 +4,6 @@ export default class Player {
         this.name = name;
         this.gender = gender;
         this.joinTimes = joinTimes;
-
     }
 
     incrementJoinTimes() {

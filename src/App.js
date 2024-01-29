@@ -8,6 +8,7 @@ import SessionInformation from "./component/SessionInformation";
 import PlayerArea from "./component/PlayerArea";
 import PlayCountBaseGroup from "./domain/PlayCountBaseGroup";
 import GenderBaseGroup from "./domain/GenderBaseGroup";
+import RandomBaseGroup from "./domain/RandomBaseGroup";
 
 const session = proxy(new Session(1))
 
@@ -65,10 +66,19 @@ function App() {
             case 'GenderBaseGroup':
                 session.groupStrategy = new GenderBaseGroup()
                 break
+            case 'RandomBaseGroup':
+                session.groupStrategy = new RandomBaseGroup()
+                break
             default:
                 session.groupStrategy = new PlayCountBaseGroup()
                 break
         }
+    }
+
+    const onResetGamePlayCount = () => {
+        session.sessionPlayers.forEach((join) => {
+            join.gamePlayCount = 0
+        })
     }
 
     return <div
@@ -80,6 +90,7 @@ function App() {
             onGroup={groupHandler}
             onAddPlayer={addSessionPlayerHandler}
             onGroupStrategyChange={onGroupStrategyChange}
+            onResetGamePlayCount={onResetGamePlayCount}
         />
 
         <PlayerArea

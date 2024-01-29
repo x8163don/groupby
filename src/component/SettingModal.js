@@ -16,7 +16,11 @@ export default function SettingModal({isOpen, handleOpen, session, onGroupStrate
                 <Radio name="group"
                        defaultChecked={session.groupStrategy.constructor.name === "GenderBaseGroup"}
                        onClick={() => onGroupStrategyHandler("GenderBaseGroup")}
-                       label="依照性別"/>
+                       label="男女混雙"/>
+                <Radio name="group"
+                       defaultChecked={session.groupStrategy.constructor.name === "RandomBaseGroup"}
+                       onClick={() => onGroupStrategyHandler("RandomBaseGroup")}
+                       label="完全隨機"/>
             </div>
         </DialogBody>
     </Dialog>

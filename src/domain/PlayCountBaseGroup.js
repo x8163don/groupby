@@ -14,7 +14,7 @@ export default class PlayCountBaseGroup extends GroupStrategy {
         }
 
         const groupedJoins = this.groupByGamePlayCount(joinPlayers);
-        const gamePlayCounts = Array.from(groupedJoins.keys()).sort();
+        const gamePlayCounts = Array.from(groupedJoins.keys()).sort((a,b) => a - b);
         let curGamePlayCount = gamePlayCounts[0];
 
         courts.forEach((court) => {
