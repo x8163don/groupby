@@ -10,14 +10,17 @@ export default function SettingModal({isOpen, handleOpen, session, onGroupStrate
             <Typography>分組方式</Typography>
             <div className="flex flex-col">
                 <Radio name="group"
+                       ripple={false}
                        defaultChecked={session.groupStrategy.constructor.name === "PlayCountBaseGroup"}
                        onClick={() => onGroupStrategyHandler("PlayCountBaseGroup")}
                        label="依上場次數"/>
                 <Radio name="group"
+                       ripple={false}
                        defaultChecked={session.groupStrategy.constructor.name === "GenderBaseGroup"}
                        onClick={() => onGroupStrategyHandler("GenderBaseGroup")}
                        label="男女混雙"/>
                 <Radio name="group"
+                       ripple={false}
                        defaultChecked={session.groupStrategy.constructor.name === "RandomBaseGroup"}
                        onClick={() => onGroupStrategyHandler("RandomBaseGroup")}
                        label="完全隨機"/>

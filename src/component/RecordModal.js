@@ -10,10 +10,10 @@ import {
 export default function RecordModal({isOpen, handleOpen, session, onResetGamePlayCount}) {
     return <Dialog open={isOpen} handler={handleOpen}>
         <DialogBody>
-            <List>
+            <List className="h-96 overflow-y-scroll">
                 {
                     session.sessionPlayers.map(join => {
-                        return <ListItem>
+                        return <ListItem ripple={false}>
                             {join.player.name}: {join.gamePlayCount}
                         </ListItem>
                     })
