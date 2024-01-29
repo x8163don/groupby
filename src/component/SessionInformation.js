@@ -36,14 +36,14 @@ export default function SessionInformation({
 
     return <div className={"w-100 flex justify-around " + className}>
         <div className="flex">
-            <Button className="flex flex-col justify-center items-center" onClick={onAddCourt} variant="text">
+            <Button className="flex flex-col justify-center items-center px-4" onClick={onAddCourt} variant="text">
                 <div className="h-6 w-6">
                     <img alt="court" src={Court}/>
                 </div>
                 <Typography variant="h6">場地</Typography>
             </Button>
 
-            <Button className="flex flex-col justify-center items-center" onClick={addPlayerModelHandler}
+            <Button className="flex flex-col justify-center items-center px-4" onClick={addPlayerModelHandler}
                     variant="text">
                 <div className="h-6 w-6">
                     <img alt="member" src={Racket}/>
@@ -51,14 +51,14 @@ export default function SessionInformation({
                 <Typography variant="h6">成員</Typography>
             </Button>
 
-            <Button className="flex flex-col justify-center items-center" onClick={onGroup} variant="text">
+            <Button className="flex flex-col justify-center items-center px-4" onClick={onGroup} variant="text">
                 <div className="h-6 w-6">
                     <img alt="group" src={Rackets}/>
                 </div>
                 <Typography variant="h6">分組</Typography>
             </Button>
 
-            <Button className="flex flex-col justify-center items-center" onClick={settingModelHandler}
+            <Button className="flex flex-col justify-center items-center px-4" onClick={settingModelHandler}
                     variant="text">
                 <div className="h-6 w-6">
                     <Cog6ToothIcon/>
@@ -66,7 +66,7 @@ export default function SessionInformation({
                 <Typography variant="h6">設定</Typography>
             </Button>
 
-            <Button className="flex flex-col justify-center items-center" onClick={recordModelHandler}
+            <Button className="flex flex-col justify-center items-center px-4" onClick={recordModelHandler}
                     variant="text">
                 <div className="h-6 w-6">
                     <img alt="record" src={Record}/>
@@ -94,8 +94,7 @@ export default function SessionInformation({
             handleOpen={recordModelHandler}
             session={session}
             onResetGamePlayCount={onResetGamePlayCount}
-        >
-        </RecordModal>
+        />
 
     </div>
 }
