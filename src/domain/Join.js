@@ -5,6 +5,7 @@ export default class Join {
         this.isRest = false;
 
         this.gamePlayCount = 0;
+        this.isPreviousGamePlayer = false
     }
 
     incrementGamePlayCount() {
@@ -13,5 +14,13 @@ export default class Join {
 
     changeRestState() {
         this.isRest = !this.isRest
+    }
+
+    markPreviousGamePlayer() {
+        this.isPreviousGamePlayer = true
+    }
+
+    unmarkPreviousGamePlayer() {
+        this.isPreviousGamePlayer = false
     }
 }

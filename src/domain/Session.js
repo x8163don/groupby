@@ -18,7 +18,7 @@ export default class Session {
         join.player.incrementJoinTimes()
     }
 
-    removeJoinPlayer(playerID){
+    removeJoinPlayer(playerID) {
         this.sessionPlayers = this.sessionPlayers.filter((join) => join.player.id !== playerID)
         this.courts.forEach((court) => {
             court.inGamePlayers = court.inGamePlayers.filter((inGamePlayer) => inGamePlayer.player.id !== playerID)
@@ -39,6 +39,7 @@ export default class Session {
         const players = this.sessionPlayers
             .filter(join => !inGamePlayerIDs.includes(join.player.id) && !restPlayerIDs.includes(join.player.id))
         this.groupStrategy.doGroup(this.courts, players)
+        this.sessionPlayers.forEach(join => join.unmarkPreviousGamePlayer())
     }
 
     changePlayerRestState(playerID) {
@@ -59,12 +60,15 @@ export default class Session {
             return
         }
 
-        const endGamePlayerIDs = targetCourt.inGamePlayers.map((inGamePlayer) => inGamePlayer.player.id)
+        targetCourt.recordPreviousGamePlayerSet()
+
+        const endGamePlayerIDs = targetCourt.inGamePlayers.map((inGamePlayer) => inGamePlayer?.player?.id)
         this.sessionPlayers.forEach(sessionPlayer => {
             if (!endGamePlayerIDs.includes(sessionPlayer.player.id)) {
                 return
             }
             sessionPlayer.incrementGamePlayCount()
+            sessionPlayer.markPreviousGamePlayer()
         })
 
         targetCourt.clearInGamePlayers()
@@ -77,7 +81,7 @@ export default class Session {
     }
 
     getNotInGamePlayers() {
-        const inGamePlayerIDs = this.courts.map((court) => court.inGamePlayers.map((inGamePlayer) => inGamePlayer.player.id)).flat(Infinity)
+        const inGamePlayerIDs = this.courts.map((court) => court.inGamePlayers.map((inGamePlayer) => inGamePlayer?.player.id)).flat(Infinity).filter(id => !!id)
         return this.sessionPlayers
             .filter(join => !join.isRest && !inGamePlayerIDs.includes(join.player.id))
             .map(join => join.player)

@@ -4,6 +4,7 @@ export default class Court {
         this.maxPlayerCount = maxPlayerCount;
 
         this.inGamePlayers = new Array(maxPlayerCount);
+        this.previousGamePlayerSet = new Map()
     }
 
     getRequirePositions() {
@@ -23,6 +24,13 @@ export default class Court {
         this.inGamePlayers[position] = inGamePlayer
     }
 
+    recordPreviousGamePlayerSet() {
+        this.previousGamePlayerSet.clear()
+        for (let i = 0; i < this.maxPlayerCount; i += 2) {
+            const key = [this.inGamePlayers[i]?.player?.id, this.inGamePlayers[i + 1]?.player?.id].sort((a, b) => a - b).join(",")
+            this.previousGamePlayerSet.set(key, true)
+        }
+    }
 
     clearInGamePlayers() {
         this.inGamePlayers = new Array(this.maxPlayerCount)
