@@ -74,6 +74,14 @@ export default class Session {
         targetCourt.clearInGamePlayers()
     }
 
+    cleanCourt(courtID){
+        let targetCourt = this.courts.find((court) => court.id === courtID)
+        if (!targetCourt) {
+            return
+        }
+        targetCourt.clearInGamePlayers()
+    }
+
     endAllGame() {
         this.courts.forEach(court => {
             this.endGame(court.id)

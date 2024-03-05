@@ -62,6 +62,10 @@ function App() {
         session.endGame(courtID)
     }
 
+    const cleanHandler = (courtID) => {
+        session.cleanCourt(courtID)
+    }
+
     const onPlayerRest = (playerID) => {
         session.changePlayerRestState(playerID)
     }
@@ -116,6 +120,7 @@ function App() {
                                       court={court}
                                       onRemoveCourt={() => removeCourtHandler(court.id)}
                                       onEndGame={() => endGameHandler(court.id)}
+                                      onClean={()=> cleanHandler(court.id)}
                     />
                 })
             }

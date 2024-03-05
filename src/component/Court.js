@@ -4,7 +4,7 @@ import Player from "./Player";
 import EmptyPlayer from "./EmptyPlayer";
 
 
-export default function Court({no, court, onRemoveCourt, onEndGame}) {
+export default function Court({no, court, onRemoveCourt, onEndGame,onClean}) {
 
     return <Card className="h-fit w-fit">
         <CardBody className="p-0">
@@ -45,7 +45,7 @@ export default function Court({no, court, onRemoveCourt, onEndGame}) {
                     }
                 </div>
                 <div
-                    className="ccol-span-1 row-span-3 border-solid border-white h-100 border-2 flex items-center justify-center">
+                    className="col-span-1 row-span-3 border-solid border-white h-100 border-2 flex items-center justify-center">
                     {
                         court.inGamePlayers[3]?.player
                             ? <Player player={court.inGamePlayers[3]?.player} color="white"/>
@@ -54,9 +54,12 @@ export default function Court({no, court, onRemoveCourt, onEndGame}) {
                 </div>
             </div>
         </CardBody>
-        <CardFooter className="flex justify-center">
+        <CardFooter className="flex justify-center gap-4">
             <Button size="sm" variant="outlined" color="green" onClick={onEndGame}>
                 <Typography variant="h6">本場結束</Typography>
+            </Button>
+            <Button size="sm" variant="outlined" color="red" onClick={onClean}>
+                <Typography variant="h6">清空</Typography>
             </Button>
         </CardFooter>
     </Card>
